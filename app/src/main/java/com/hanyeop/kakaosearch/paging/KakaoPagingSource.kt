@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.hanyeop.kakaosearch.api.KakaoApi
 import com.hanyeop.kakaosearch.model.Document
+import com.hanyeop.kakaosearch.util.Constants.Companion.EMPTY_RESULT
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -30,7 +31,7 @@ class KakaoPagingSource(
             LoadResult.Page(
                 data = images ?: listOf(
                     Document(
-                        "",
+                        EMPTY_RESULT,
                         "",
                         "",
                         ""
