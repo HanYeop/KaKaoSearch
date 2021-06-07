@@ -34,7 +34,7 @@ class KakaoImageAdapter : PagingDataAdapter<Document, KakaoImageAdapter.ImageVie
                 Glide.with(itemView)
                     .load(image.thumbnail_url)
                     .centerCrop()
-                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .transition(DrawableTransitionOptions.withCrossFade()) // 애니메이션
                     .error(R.drawable.empty_icon)
                     .into(imageView)
                 sitenameText.text = image.sitename
