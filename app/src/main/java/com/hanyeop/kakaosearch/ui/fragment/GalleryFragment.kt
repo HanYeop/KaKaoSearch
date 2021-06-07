@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import com.hanyeop.kakaosearch.R
 import com.hanyeop.kakaosearch.databinding.FragmentGalleryBinding
 import com.hanyeop.kakaosearch.paging.KakaoImageAdapter
+import com.hanyeop.kakaosearch.ui.adapter.ImageLoadStateAdapter
 import com.hanyeop.kakaosearch.viewmodel.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +33,10 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
         binding.apply {
             galleryRecyclerView.setHasFixedSize(true) // 사이즈 고정
-            galleryRecyclerView.adapter = adapter
+            galleryRecyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+                header = ImageLoadStateAdapter{ adapter.retry() },
+                footer = ImageLoadStateAdapter{ adapter.retry() }
+            )
         }
 
         viewModel.images.observe(viewLifecycleOwner){
