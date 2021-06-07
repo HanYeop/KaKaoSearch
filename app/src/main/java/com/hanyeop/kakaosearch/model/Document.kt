@@ -8,5 +8,5 @@ data class Document(
     val sitename : String,
     val collection : String,
     val image_url : String,
-    val datetime : Date
+    val thumbnail_url : String,
 )
