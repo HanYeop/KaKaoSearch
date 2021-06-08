@@ -1,10 +1,9 @@
 package com.hanyeop.kakaosearch.ui.fragment
 
 import android.os.Bundle
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.hanyeop.kakaosearch.R
 import com.hanyeop.kakaosearch.databinding.FragmentGalleryBinding
@@ -33,15 +32,48 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
         binding.apply {
             galleryRecyclerView.setHasFixedSize(true) // 사이즈 고정
+            // header, footer 설정
             galleryRecyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
                 header = ImageLoadStateAdapter{ adapter.retry() },
                 footer = ImageLoadStateAdapter{ adapter.retry() }
             )
         }
 
+        // 관찰하여 변경 시 알림
         viewModel.images.observe(viewLifecycleOwner){
             adapter.submitData(viewLifecycleOwner.lifecycle,it)
         }
+
+        // 메뉴 설정
+        setHasOptionsMenu(true)
+    }
+
+    // 검색 창
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.menu_gallery,menu)
+
+        // 아이템 연결
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            // 제출 버튼 눌렀을 때
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if(query != null){
+                    binding.galleryRecyclerView.scrollToPosition(0) // 처음으로 돌아감
+                    viewModel.searchImages(query)
+                    searchView.clearFocus() // 포커스 없애기 (커서 없애기)
+                }
+                return true
+            }
+
+            // 검색어 값 변경시
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
     }
 
     // 프래그먼트는 뷰보다 오래 지속 . 프래그먼트의 onDestroyView() 메서드에서 결합 클래스 인스턴스 참조를 정리

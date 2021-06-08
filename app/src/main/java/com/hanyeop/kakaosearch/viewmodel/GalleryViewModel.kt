@@ -14,10 +14,12 @@ class GalleryViewModel @ViewModelInject constructor(
 
     private val currentQuery = MutableLiveData(DEFAULT_QUERY)
 
+    // 라이브 데이터 변경 시 다른 라이브 데이터 발행
     val images = currentQuery.switchMap { queryString ->
         repository.getSearchResults(queryString).cachedIn(viewModelScope)
     }
 
+    // 라이브 데이터 변경
     fun searchImages(query: String) {
         currentQuery.value = query
     }
