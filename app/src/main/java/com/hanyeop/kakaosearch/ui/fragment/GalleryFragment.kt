@@ -38,14 +38,14 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
                 // 로딩 중 일 때
                 progressBar.isVisible = combinedLoadStates.source.refresh is LoadState.Loading
 
-                // 로딩 중이지 않을 때
+                // 로딩 중이지 않을 때 (활성 로드 작업이 없고 에러가 없음)
                 galleryRecyclerView.isVisible = combinedLoadStates.source.refresh is LoadState.NotLoading
 
                 // 로딩 에러 발생 시
                 retryButton.isVisible = combinedLoadStates.source.refresh is LoadState.Error
                 errorText.isVisible = combinedLoadStates.source.refresh is LoadState.Error
 
-                // 로딩 되지 않음 & 로드할 수 없음 & 개수 1 미만 (empty)
+                // 활성 로드 작업이 없고 에러가 없음 & 로드할 수 없음 & 개수 1 미만 (empty)
                 if(combinedLoadStates.source.refresh is LoadState.NotLoading
                     && combinedLoadStates.append.endOfPaginationReached
                     && adapter.itemCount < 1){
