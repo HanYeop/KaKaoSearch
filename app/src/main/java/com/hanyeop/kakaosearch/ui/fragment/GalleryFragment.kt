@@ -6,16 +6,18 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.hanyeop.kakaosearch.R
 import com.hanyeop.kakaosearch.databinding.FragmentGalleryBinding
+import com.hanyeop.kakaosearch.model.Document
 import com.hanyeop.kakaosearch.paging.KakaoImageAdapter
 import com.hanyeop.kakaosearch.ui.adapter.ImageLoadStateAdapter
 import com.hanyeop.kakaosearch.viewmodel.GalleryViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class GalleryFragment : Fragment(R.layout.fragment_gallery) {
+class GalleryFragment : Fragment(R.layout.fragment_gallery), KakaoImageAdapter.OnItemClickListener {
 
     // 뷰모델 생성
     private val viewModel by viewModels<GalleryViewModel>()
@@ -30,7 +32,8 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         // 뷰바인딩
         _binding = FragmentGalleryBinding.bind(view)
 
-        val adapter = KakaoImageAdapter()
+        // 어댑터 생성
+        val adapter = KakaoImageAdapter(this)
 
         // 로딩상태 리스너
         adapter.addLoadStateListener { combinedLoadStates ->
@@ -75,6 +78,7 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
             }
         }
 
+
         // 관찰하여 변경 시 알림
         viewModel.images.observe(viewLifecycleOwner){
             adapter.submitData(viewLifecycleOwner.lifecycle,it)
@@ -82,6 +86,11 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
 
         // 메뉴 설정
         setHasOptionsMenu(true)
+    }
+
+    override fun onItemClick(document: Document) {
+        val action = GalleryFragmentDirections.actionGalleryFragmentToDetailFragment(document)
+        findNavController().navigate(action)
     }
 
     // 검색 창

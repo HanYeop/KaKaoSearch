@@ -9,5 +9,18 @@
         android:id="@+id/galleryFragment"
         android:name="com.hanyeop.kakaosearch.ui.fragment.GalleryFragment"
         android:label="fragment_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_galleryFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.hanyeop.kakaosearch.ui.fragment.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="document"
+            app:argType="com.hanyeop.kakaosearch.model.Document" />
+    </fragment>
 </navigation>

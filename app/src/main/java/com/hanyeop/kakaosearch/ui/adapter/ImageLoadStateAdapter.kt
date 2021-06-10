@@ -24,6 +24,7 @@ class ImageLoadStateAdapter(private val retry: () -> Unit)
         : RecyclerView.ViewHolder(binding.root){
 
         init{
+            // 버튼 클릭 시 Fragment 에서 받아온 동작 호출 (retry)
             binding.retryButton.setOnClickListener {
                 retry.invoke()
             }

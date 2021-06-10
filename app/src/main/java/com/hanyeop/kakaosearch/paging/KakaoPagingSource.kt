@@ -34,7 +34,8 @@ class KakaoPagingSource(
                         EMPTY_RESULT,
                         "",
                         "",
-                        ""
+                        "",
+                        null
                     )
                 ),
                 prevKey = if (position == 1) null else position - 1,
