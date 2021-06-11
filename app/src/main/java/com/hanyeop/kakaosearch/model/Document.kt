@@ -8,7 +8,7 @@ import java.util.*
 @Parcelize
 data class Document(
     @SerializedName("display_sitename")
-    val sitename : String,
+    val siteName : String,
     val collection : String,
     val image_url : String,
     val thumbnail_url : String,

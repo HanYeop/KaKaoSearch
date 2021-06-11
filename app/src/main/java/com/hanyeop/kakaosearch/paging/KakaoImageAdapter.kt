@@ -53,7 +53,7 @@ class KakaoImageAdapter(private val listener : OnItemClickListener)
                     .transition(DrawableTransitionOptions.withCrossFade()) // 애니메이션
                     .error(R.drawable.empty_icon)
                     .into(imageView)
-                sitenameText.text = image.sitename
+                sitenameText.text = image.siteName
             }
         }
     }
