@@ -1,14 +1,15 @@
 package com.hanyeop.kakaosearch.viewmodel
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import androidx.paging.cachedIn
 import com.hanyeop.kakaosearch.repository.KakaoRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class GalleryViewModel @ViewModelInject constructor(
+@HiltViewModel
+class GalleryViewModel @Inject constructor(
     private val repository: KakaoRepository,
-    @Assisted state : SavedStateHandle
+    state : SavedStateHandle
 ) : ViewModel() {
 
     private val currentQuery = state.getLiveData(CURRENT_QUERY,DEFAULT_QUERY)
