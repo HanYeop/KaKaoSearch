@@ -17,9 +17,9 @@ class KakaoPagingSource(
 ) : PagingSource<Int,Document>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Document> {
-        val position = params.key ?: STARTING_PAGE_INDEX
 
         return try {
+            val position = params.key ?: STARTING_PAGE_INDEX
             val response = kakaoApi.searchImage(
                 query = query,
                 sort = sort,
