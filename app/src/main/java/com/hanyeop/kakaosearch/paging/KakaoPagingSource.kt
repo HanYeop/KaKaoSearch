@@ -38,7 +38,7 @@ class KakaoPagingSource(
                         null
                     )
                 ),
-                prevKey = if (position == 1) null else position - 1,
+                prevKey = if (position == STARTING_PAGE_INDEX) null else position - 1,
                 nextKey = if (response.body()?.metaData?.isEnd == true) null else position + 1
             )
 
