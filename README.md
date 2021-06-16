@@ -1,5 +1,5 @@
 # KaKaoSearch
-KaKao Image Search API 를 이용한 이미지 검색 앱 만들기
+KaKao Image Search API 를 이용한 이미지 검색 앱
 
 ![image](https://user-images.githubusercontent.com/50766393/122225727-4761d980-cef0-11eb-934c-6d1ffdc705ab.png)
 
