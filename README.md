@@ -1,5 +1,5 @@
 # KaKaoSearch
-KaKao Image Search API 를 이용한 이미지 검색 앱
+Paging3 와 KaKao Image Search API 를 이용한 이미지 검색 앱
 
 [APK 다운로드](https://github.com/HanYeop/KaKaoSearch/files/6878929/KaKaoSearch.zip)
 
